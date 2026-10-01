@@ -1,0 +1,65 @@
+# Redraft
+
+A private chat tool that tailors a CV to one job description, the way Tobi's best resume chats did: upload, analyse, answer questions, approve anything beyond the CV, iterate, download the Word resume, then write the cover letter from it.
+
+- **Next.js** on Vercel, **Supabase** for invite-only sign-in and saved sessions, **Claude API** for the writing.
+- Claude Sonnet 5.5 by default; **Deep mode** switches to Claude Opus 5.5.
+- Uploaded files are turned into text on the server and thrown away. Only the text is kept, inside the session.
+- Output always follows the house format in `lib/redraft/rules.ts`, never the candidate's original layout.
+
+## One-time setup (about 20 minutes)
+
+### 1. Supabase
+1. Create a project at supabase.com. Pick the **Canada (Central)** region.
+2. **SQL Editor** → paste `supabase/schema.sql` → Run.
+3. **Authentication → Sign In / Providers → Email**: keep Email on. Turn **off** "Allow new users to sign up" (invite only).
+4. **Authentication → Users → Invite user**: add yourself and each person in your circle.
+5. **Project Settings → API**: copy the **Project URL** and the **publishable key** (or the legacy anon key).
+
+### 2. Anthropic
+1. console.anthropic.com → **API keys** → create a key.
+2. **Billing → Limits**: set a monthly spend limit.
+
+### 3. Vercel
+1. **Add New → Project** → import this GitHub repo.
+2. Add these environment variables:
+
+| Name | Value |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase Project URL |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase publishable (or anon) key |
+| `ANTHROPIC_API_KEY` | Your Anthropic key |
+| `CRON_SECRET` | Any long random string (protects the keep-alive ping) |
+
+3. Deploy. Note the site address, e.g. `https://redraft-xyz.vercel.app`.
+
+### 4. Connect sign-in to the site
+Supabase → **Authentication → URL Configuration**:
+- **Site URL**: your Vercel address.
+- **Redirect URLs**: add `https://YOUR-SITE/auth/callback` (and `http://localhost:3000/auth/callback` for local use).
+
+Done. Open the site, enter your email, click the link.
+
+## Day to day
+- **Invite someone**: Supabase → Authentication → Users → Invite user.
+- **Remove someone**: delete the user there. Their sessions are deleted with them.
+- **Change the method**: edit `lib/redraft/rules.ts` and push. Vercel redeploys.
+- **Keep-alive**: `vercel.json` pings Supabase once a day so the free project doesn't pause from inactivity.
+
+## Local development
+```bash
+cp .env.example .env.local   # fill in the values
+npm install
+npm run dev
+```
+
+## Where things live
+| Path | What it does |
+| --- | --- |
+| `lib/redraft/rules.ts` | The house method and reply format Claude follows |
+| `lib/redraft/app.js` | Chat, confirm cards, resume editor, keyword report, sessions |
+| `lib/redraft/builders.js` | Word builders (Calibri, single column, no tables, headers or footers) |
+| `app/api/chat/route.ts` | Calls Claude with prompt caching and streams the reply |
+| `app/api/extract/route.ts` | Turns .docx / .pdf / .txt into text; nothing stored |
+| `proxy.ts` | Sends anyone not signed in to `/login` |
+| `supabase/schema.sql` | The one table plus row-level security |
