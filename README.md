@@ -42,9 +42,15 @@ Supabase → **Authentication → URL Configuration**:
 
 Done. Open the site, enter your email, click the link.
 
+### 5. Set up custom SMTP (do this before inviting real users)
+Supabase's built-in email sender is capped at **2 emails/hour per project** — fine for the one test invite, not for real use. Every sign-in link, invite, and password reset shares that quota, so without custom SMTP, people will quickly start seeing "link couldn't be sent" or expired-link errors.
+
+Supabase → **Authentication → Emails → SMTP Settings**: add credentials from a provider like Resend or Postmark (free tiers cover invite-only use easily).
+
 ## Day to day
 - **Invite someone**: Supabase → Authentication → Users → Invite user.
 - **Remove someone**: delete the user there. Their sessions are deleted with them.
+- **Sign in**: the login page offers either a one-time sign-in link (magic link) or email + password. New invites only have the magic-link option until they set a password via **Forgot password**.
 - **Change the method**: edit `lib/redraft/rules.ts` and push. Vercel redeploys.
 - **Keep-alive**: `vercel.json` pings Supabase once a day so the free project doesn't pause from inactivity.
 
@@ -63,6 +69,9 @@ npm run dev
 | `lib/redraft/builders.js` | Editable `.docx` builders in Tobi's Calibri house CV format |
 | `app/api/chat/route.ts` | Calls Claude with prompt caching and streams the reply |
 | `app/api/extract/route.ts` | Turns .docx / .pdf / .txt into text; original uploads are not stored |
+| `app/login/page.tsx` | Sign-in page: magic link, email + password, and forgot-password |
+| `app/auth/callback/route.ts` | Exchanges the one-time code from any auth email for a session |
+| `app/auth/update-password/page.tsx` | Where a password-reset link lands so the user can set a new password |
 | `proxy.ts` | Sends anyone not signed in to `/login` |
 | `supabase/schema.sql` | Per-user session table and row-level security |
 | `supabase/final-files-schema.sql` | Separate final-file table, row-level security, and private Storage policies |
