@@ -20,11 +20,16 @@ export default function RedraftApp() {
       <div className="app">
         <header className="bar">
           <div className="brand"><span className="brand-mark" aria-hidden="true"></span>Redraft</div>
-          <button type="button" className="session-title" id="sessTitle" title="Rename this session">New session</button>
-          <div className="bar-actions">
-            <label className="toggle" title="Uses Claude Opus. Slower, better for first builds."><input type="checkbox" id="deep" /> Deep mode</label>
-            <button className="btn" id="sessionsBtn" hidden>Sessions</button>
-            <button className="btn" id="newBtn">New</button>
+          <button type="button" className="icon-btn menu-toggle" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="barTools">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+          <div className="bar-tools" id="barTools">
+            <button type="button" className="session-title" id="sessTitle" title="Rename this session">New session</button>
+            <div className="bar-actions">
+              <label className="toggle" title="Uses Claude Opus. Slower, better for first builds."><input type="checkbox" id="deep" /> Deep mode</label>
+              <button className="btn" id="sessionsBtn" hidden>Sessions</button>
+              <button className="btn" id="newBtn">New</button>
+            </div>
           </div>
         </header>
         <nav className="view-switch" role="group" aria-label="View">
@@ -43,7 +48,10 @@ export default function RedraftApp() {
                   <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.6 8.6a5 5 0 0 1-7.1-7.1l8.6-8.6a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg>
                 </button>
                 <textarea id="box" rows={1} placeholder="Attach the CV, paste the job description, or ask anything" />
-                <button className="btn primary" id="send" style={{ height: 42 }}>Send</button>
+                <button className="btn primary send-btn" id="send" aria-label="Send" style={{ height: 42 }}>
+                  <span className="send-label">Send</span>
+                  <svg className="send-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+                </button>
               </div>
               <input type="file" id="file" multiple accept=".pdf,.docx,.txt,.md" hidden />
               <div className="hint" id="hint">Loading…</div>

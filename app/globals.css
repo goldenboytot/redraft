@@ -32,7 +32,7 @@ button { cursor: pointer; }
 .app { height: 100%; display: grid; grid-template-rows: auto auto 1fr; }
 
 /* top bar */
-.bar { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; }
+.bar { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; position: relative; }
 .brand { font: 700 18px/1 var(--f-display); letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
 .brand-mark { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); position: relative; }
 .brand-mark::after { content: ""; position: absolute; left: 5px; right: 5px; top: 6px; height: 2px; background: var(--accent-ink); box-shadow: 0 4px 0 var(--accent-ink), 0 8px 0 var(--accent-ink); }
@@ -48,6 +48,9 @@ button { cursor: pointer; }
 .btn:disabled { opacity: .5; cursor: default; }
 .toggle { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
 .view-switch { display: none; }
+.bar-tools { display: contents; }
+.icon-btn.menu-toggle { display: none; }
+.send-icon { display: none; }
 
 /* panes */
 .panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); min-height: 0; }
@@ -60,6 +63,30 @@ button { cursor: pointer; }
   .panes { grid-template-columns: minmax(0, 1fr); }
   .panes[data-show="chat"] .docs, .panes[data-show="docs"] .chat { display: none; }
   .chat { border-right: 0; }
+
+  /* collapse the header's session/toggle/session-list/new controls into a dropdown menu */
+  .icon-btn.menu-toggle { display: grid; margin-left: auto; }
+  .bar-tools { display: none; }
+  .bar-tools.open {
+    display: flex; flex-direction: column; align-items: stretch; gap: 10px;
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 15;
+    background: var(--surface); border-bottom: 1px solid var(--line); padding: 12px 16px;
+    box-shadow: 0 10px 24px rgb(0 0 0 / .12);
+  }
+  .bar-tools.open .session-title { width: 100%; text-align: left; white-space: normal; }
+  .bar-tools.open .bar-actions { flex-direction: column; align-items: stretch; }
+  .bar-tools.open .bar-actions .toggle { padding: 8px 4px; }
+  .bar-tools.open .bar-actions .btn { width: 100%; text-align: center; }
+
+  /* roomier composer on phones */
+  body #box { min-height: 112px; font-size: 17px; padding: 16px; }
+  .send-btn { width: 48px; height: 48px !important; padding: 0; border-radius: 50%; display: grid; place-items: center; }
+  .send-label { display: none; }
+  .send-icon { display: block; width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-btn#attach { width: 48px; height: 48px; }
+
+  /* let the empty-state intro sit in the middle of the pane instead of leaving a dead gap above the composer */
+  .log:has(.welcome) { justify-content: center; }
 }
 
 /* touch devices: bigger tap targets, and 16px inputs so iOS Safari doesn't zoom in on focus */
