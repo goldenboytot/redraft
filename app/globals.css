@@ -4,10 +4,10 @@
   --bg: #efebe0; --surface: #ffffff; --surface-2: #e7e1d1; --ink: #2f2a22; --muted: #8b8371; --line: #ddd5c0;
   --accent: #6f93d1; --accent-ink: #ffffff; --accent-soft: #e1e8f6;
   --ok: #5c8a68; --ok-soft: #e2ecdf; --warn: #b2730f; --warn-soft: #f8edd9; --bad: #c05a3a; --bad-soft: #f5ded3;
-  --paper: #ffffff; --paper-ink: #111111; --paper-rule: #404040;
+  --paper: #ffffff; --paper-ink: #000000; --paper-rule: #1f4e79;
   --f-display: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --f-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --f-doc: "Carlito", Calibri, "Segoe UI", Arial, sans-serif;
+  --f-doc: Calibri, Carlito, "Segoe UI", Arial, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   --r: 12px;
 }
@@ -155,24 +155,31 @@ button { cursor: pointer; }
 .check.ok { background: var(--ok-soft); color: var(--ok); } .check.warn { background: var(--warn-soft); color: var(--warn); } .check.bad { background: var(--bad-soft); color: var(--bad); }
 .empty { border: 1px dashed var(--line); border-radius: var(--r); padding: 22px; color: var(--muted); text-align: center; }
 
-/* the sheet: a Word-like page in Carlito (metric twin of Calibri) */
-.sheet { background: var(--paper); color: var(--paper-ink); font: 11pt/1.32 var(--f-doc); padding: clamp(18px, 5%, 56px); border-radius: 4px; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 6px 24px rgb(0 0 0 / .06); max-width: 816px; width: 100%; margin: 0 auto; overflow-wrap: anywhere; }
-.sheet .nm { font-size: 16pt; font-weight: 700; }
-.sheet .hl { font-size: 12pt; font-weight: 700; margin-top: 2px; }
-.sheet .ct { font-size: 10pt; margin: 2px 0 8px; }
-.sheet .sh { font-weight: 700; text-transform: uppercase; font-size: 11.5pt; border-bottom: 1px solid var(--paper-rule); margin: 12px 0 5px; padding-bottom: 1px; }
-.sheet p { margin: 0 0 5px; }
-.sheet ul { margin: 0 0 4px; padding-left: 20px; }
-.sheet li { margin: 0 0 3px; }
-.sheet .jt { font-weight: 700; margin-top: 9px; }
-.sheet .jm { font-style: italic; margin-bottom: 3px; }
-.sheet .gh { font-weight: 700; font-size: 10.5pt; margin-top: 4px; }
-.sheet .ah { font-weight: 700; margin-top: 5px; }
-.sheet [contenteditable]:hover { background: rgb(31 95 139 / .07); }
-.sheet [contenteditable]:focus { outline: 1px dashed #1f5f8b; outline-offset: 1px; background: rgb(31 95 139 / .06); }
-.sheet mark { background: #fbe7a8; color: inherit; }
-.sheet .rm { border: 0; background: transparent; color: #8a8a8a; font-size: 12px; margin-left: 4px; padding: 0 3px; opacity: 0; }
-.sheet li:hover .rm, .sheet li:focus-within .rm { opacity: 1; }
+/* Read-only preview of the Calibri house CV. */
+.sheet { background: var(--paper); color: #000; font: 10pt/1.2 Calibri, Carlito, "Segoe UI", Arial, sans-serif; padding: .75in .7236in .75in .875in; border-radius: 4px; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 6px 24px rgb(0 0 0 / .06); max-width: 816px; width: 100%; margin: 0 auto; overflow-wrap: anywhere; }
+.resume-sheet p, .cover-sheet p { margin: 0; }
+.resume-header { text-align: center; line-height: 1.2; }
+.resume-name { color: #1f4e79; font-size: 18pt; font-weight: 700; text-transform: uppercase; margin-bottom: 3pt; }
+.resume-contact { color: #555; font-size: 9.5pt; margin-bottom: 2pt; }
+.resume-header-rule { height: 4pt; border-bottom: 3px solid #1f4e79; margin-bottom: 6pt; }
+.resume-section-heading { color: #1f4e79; font-size: 11pt; line-height: 1.2; font-weight: 700; text-transform: uppercase; border-bottom: 1.33px solid #1f4e79; margin: 8pt 0 3pt; padding: 0 0 1pt; }
+.resume-summary { font-size: 10pt; margin: 4pt 0 !important; }
+.resume-achievement-heading { font-size: 10pt; margin: 2pt 0 !important; }
+.resume-job-title, .resume-degree { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.resume-job-title { color: #1f4e79; font-size: 11pt; margin-top: 6pt !important; margin-bottom: 1pt !important; }
+.resume-job-title span, .resume-degree span { flex: 0 0 auto; color: #555; font-size: 9.5pt; font-style: italic; text-align: right; }
+.resume-employer { color: #555; font-size: 10pt; font-weight: 700; margin-bottom: 3pt !important; }
+.resume-role-summary { font-size: 10pt; margin: 2pt 0 3pt !important; }
+.resume-role-later { margin-top: 6pt; }
+.resume-bullets { margin: 0; padding-left: 22pt; }
+.resume-bullets li { padding-left: 0; margin: 2pt 0; }
+.resume-skill-bullet { font-size: 10pt; margin: 2pt 0 !important; }
+.resume-degree { font-size: 10pt; margin: 4pt 0 1.5pt !important; }
+.resume-institution { color: #555; font-size: 10pt; margin-bottom: 2pt !important; }
+.resume-sub-label { font-size: 10pt; margin: 4pt 0 1pt !important; }
+.cover-sheet { font-size: 11pt; line-height: 1.2; }
+.cover-sheet .resume-header { margin-bottom: 12pt; }
+.cover-sheet > p { margin-bottom: 8pt; }
 .note { font-size: 13px; color: var(--muted); }
 
 /* keywords */

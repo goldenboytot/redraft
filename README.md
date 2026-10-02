@@ -2,19 +2,21 @@
 
 A private chat tool that tailors a CV to one job description, the way Tobi's best resume chats did: upload, analyse, answer questions, approve anything beyond the CV, iterate, download the Word resume, then write the cover letter from it.
 
-- **Next.js** on Vercel, **Supabase** for invite-only sign-in and saved sessions, **Claude API** for the writing.
+- **Next.js** on Vercel, **Supabase** for invite-only sign-in, per-user saved sessions, and private final-file storage, **Claude API** for the writing.
 - Claude Sonnet 5.5 by default; **Deep mode** switches to Claude Opus 5.5.
-- Uploaded files are turned into text on the server and thrown away. Only the text is kept, inside the session.
+- Uploaded files are turned into text on the server; the original uploads are discarded. Extracted text and chat history are saved in that user's session.
+- Generated resumes, cover letters, and keyword reports are editable Word `.docx` files only, using Tobi's Calibri house CV format. PDF is supported only as an uploaded source document, never as an export format. Generated files are stored in the user's private final-files area only when the user explicitly chooses **Save as final**.
 - Output always follows the house format in `lib/redraft/rules.ts`, never the candidate's original layout.
 
 ## One-time setup (about 20 minutes)
 
 ### 1. Supabase
 1. Create a project at supabase.com. Pick the **Canada (Central)** region.
-2. **SQL Editor** → paste `supabase/schema.sql` → Run.
-3. **Authentication → Sign In / Providers → Email**: keep Email on. Turn **off** "Allow new users to sign up" (invite only).
-4. **Authentication → Users → Invite user**: add yourself and each person in your circle.
-5. **Project Settings → API**: copy the **Project URL** and the **publishable key** (or the legacy anon key).
+2. **SQL Editor** → paste `supabase/schema.sql` → Run to create per-user sessions.
+3. Paste `supabase/final-files-schema.sql` → Run to create private final-file storage. For an existing Redraft project, run only this new SQL file.
+4. **Authentication → Sign In / Providers → Email**: keep Email on. Turn **off** "Allow new users to sign up" (invite only).
+5. **Authentication → Users → Invite user**: add yourself and each person in your circle.
+6. **Project Settings → API**: copy the **Project URL** and the **publishable key** (or the legacy anon key).
 
 ### 2. Anthropic
 1. console.anthropic.com → **API keys** → create a key.
@@ -57,9 +59,10 @@ npm run dev
 | Path | What it does |
 | --- | --- |
 | `lib/redraft/rules.ts` | The house method and reply format Claude follows |
-| `lib/redraft/app.js` | Chat, confirm cards, resume editor, keyword report, sessions |
-| `lib/redraft/builders.js` | Word builders (Calibri, single column, no tables, headers or footers) |
+| `lib/redraft/app.js` | Chat, confirm cards, resume editor, keyword report, sessions, and tagged final-file actions |
+| `lib/redraft/builders.js` | Editable `.docx` builders in Tobi's Calibri house CV format |
 | `app/api/chat/route.ts` | Calls Claude with prompt caching and streams the reply |
-| `app/api/extract/route.ts` | Turns .docx / .pdf / .txt into text; nothing stored |
+| `app/api/extract/route.ts` | Turns .docx / .pdf / .txt into text; original uploads are not stored |
 | `proxy.ts` | Sends anyone not signed in to `/login` |
-| `supabase/schema.sql` | The one table plus row-level security |
+| `supabase/schema.sql` | Per-user session table and row-level security |
+| `supabase/final-files-schema.sql` | Separate final-file table, row-level security, and private Storage policies |

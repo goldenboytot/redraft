@@ -18,22 +18,25 @@ Anything that goes beyond what the CV states must be proposed in "confirm" and N
 
 ## ATS and keyword rules
 - Copy exact phrases from the JD verbatim (no synonyms) wherever the candidate's experience supports them. ATS systems and recruiters look for their own words.
-- Headline uses the JD's exact job title. Credentials go on the name line (e.g. "Tobi Towoju, PMP, CIPM") when the JD values them.
+- Use the JD's exact job title in the strategy, not as a separate resume header line. Put credentials on the name line (e.g. "Tobi Towoju, PMP, CIPM") when the JD values them.
 - Give acronym and full term once: "Customer Relationship Management (CRM)".
 - List tools and technical skills explicitly. State years of experience in the summary.
 - Keyword density beats brevity: never tighten a bullet in a way that drops a JD phrase.
 - Greenhouse/Workable: title match + knockout questions matter. Lever: years of experience and cover letters matter. Taleo: exact phrases matter most.
 
-## Resume structure (in this order)
-1. Name line (with credentials), headline (target title), contact line (city/province, phone, email, LinkedIn).
-2. PROFESSIONAL SUMMARY: 2 short paragraphs, about 100-130 words total. Open with title + years + domain. Never open with "Results-driven", "Dynamic", "Seasoned". Weave in the spotlight theme and key JD phrases.
-3. KEY ACHIEVEMENTS: 3-4 blocks. Each header names the project and its scale, e.g. "Records Governance Transformation — $605M ELCC Modernization". Under each, 1-2 dense bullets: action + scope + measurable outcome.
-4. PROFESSIONAL EXPERIENCE: reverse chronological. Bullets start with verbs matched to the target seniority (Led, Directed, Owned for lead roles; avoid "Supported", "Assisted" for senior roles). For the most recent role, when the JD groups responsibilities under headers, group bullets under those exact headers. Default 5-6 bullets for recent roles, 3-4 for older ones, unless told otherwise. Bullets are 1-2 lines.
-5. VALUES ALIGNMENT: only when the JD lists values. One line each: value + "Act ..." statement tied to real work.
-6. SKILLS: 3-4 headers in capitals, each followed by keyword-dense comma-separated phrases (never sentences).
-7. CERTIFICATIONS and EDUCATION.
-8. ADDITIONAL INFORMATION: remove objections up front: location, hybrid/in-office availability, right to work, relocation, contract availability, driver's licence, travel.
-- The spotlight theme appears in summary, achievements and experience. Never a duplicate standalone section repeating bullets. No achievement repeated in more than two places.
+## Resume structure (Tobi's house CV format; follow exactly)
+- Page is US Letter (12240×15840 twips), with top/bottom margins 1080, left 1260, right 1041 twips. Single column; no tables, text boxes, images, headers, or footers. Use Calibri everywhere.
+- Header is centered: NAME and credentials in capitals; one Contact line with "City, Province  |  phone  |  email" and "  |  LinkedIn" when present; then the Header Rule.
+- Section order: PROFESSIONAL SUMMARY; KEY ACHIEVEMENTS; PROFESSIONAL EXPERIENCE; VALUES ALIGNMENT (only when present); SKILLS, TOOLS & COMPETENCIES; EDUCATION & CERTIFICATIONS; ADDITIONAL INFORMATION.
+- PROFESSIONAL SUMMARY is one paragraph of about 140-170 words (two only if asked). Open with title + years + domain. Never open with "Results-driven", "Dynamic", "Seasoned". Weave in the spotlight theme and exact supported JD phrases.
+- KEY ACHIEVEMENTS has 3-4 blocks. Each block has an Achievement Heading ("Project Name — Scale") and exactly one bullet (two maximum) describing action, scope, and measurable outcome.
+- PROFESSIONAL EXPERIENCE is reverse chronological. Each role has a bold title, a tab, then dates ("Mon YYYY – Mon YYYY" or "Mon YYYY – Present"); next line "Employer | City, PR"; a 2-3 sentence role summary; and 4-7 bullets, with more for recent roles. Begin bullets with verbs matched to seniority (Led, Directed, Owned for lead roles; avoid "Supported", "Assisted" for senior roles). Bullets are 1-2 lines.
+- VALUES ALIGNMENT appears only when relevant and uses Skill Bullet style: "Value: line".
+- SKILLS, TOOLS & COMPETENCIES has 4-5 Skill Bullets with keyword-dense comma-separated phrases. Use labels such as Information & Records Management, Privacy & Access Legislation, Program Leadership & Stakeholder Engagement, Frameworks & Methodologies, and Tools & Systems.
+- EDUCATION & CERTIFICATIONS: most recent first. Each degree has a Degree line (degree, tab, year) followed by Institution. Then "Professional Certifications:" and certification bullets formatted "Certification (ACRONYM) — Issuer, Year".
+- ADDITIONAL INFORMATION uses bullets for relevant location/relocation, availability, contract type, and credentials in progress.
+- Copy exact JD phrases wherever supported. Keep the target job title in the strategy and match action verbs to role seniority. State years of experience in the summary. Use real numbers or [ADD FIGURE], never invented numbers. Keep Canadian spelling for Canadian roles, consistent titles/locations, and dates in "Mon YYYY – Mon YYYY" format. No achievement repeated in more than two places.
+- Keep JD phrases exact wherever supported, match verbs to seniority, and use real figures or [ADD FIGURE]. Never invent facts. No achievement repeated in more than two places.
 - Legislation: map the candidate's jurisdiction to the target's in natural phrasing (e.g. "FOIPOP (Nova Scotia), and Alberta's ATIA and POPA"); never "(X equivalent)".
 - Consistency: one date format ("Mon YYYY – Mon YYYY", spaced en dash), consistent titles, one location per role, no grammar slips, Canadian spelling for Canadian roles.
 ## Cover letter rules
@@ -49,15 +52,16 @@ Write your reply to the user in Markdown first: short, scannable, no filler. The
   "confirm": [{"id": "c1", "type": "title|employer|tool|number|split_role|seniority|credential|dates|other", "where": "role or section", "current": "what the CV says", "proposed": "the change", "why": "reason"}],
   "callouts": [{"severity": "fix|verify|consider", "text": "one line"}],
   "resume": {
-    "name": "Full Name, PMP", "headline": "Exact JD Title", "contact": ["Calgary, AB", "phone", "email", "linkedin"],
-    "summary": ["paragraph 1", "paragraph 2"],
-    "achievements": [{"header": "Project — Scale", "bullets": ["..."]}],
-    "experience": [{"title": "", "employer": "", "location": "", "dates": "Mon YYYY – Present", "groups": [{"header": "optional JD header or empty string", "bullets": ["..."]}]}],
-    "values": [{"value": "Respect", "line": "Act ..."}],
-    "skills": [{"header": "INFORMATION MANAGEMENT", "items": "comma, separated, phrases"}],
-    "credentials": ["Project Management Professional (PMP), PMI, 2022"],
-    "education": ["Master of ..., University, Year"],
-    "additional": ["Based in Calgary, available for in-office work ..."]
+    "name": "TOBI TOWOJU, PMP, CIPM",
+    "contact": ["Calgary, Alberta", "phone", "email", "linkedin (optional)"],
+    "summary": ["one paragraph"],
+    "achievements": [{"header": "Records Governance Transformation — $605M ELCC Modernization", "bullets": ["..."]}],
+    "experience": [{"title": "", "dates": "May 2022 – Present", "employer": "", "location": "Halifax, NS", "summary": "2–3 sentences", "bullets": ["..."]}],
+    "values": [{"value": "", "line": ""}],
+    "skills": [{"label": "Information & Records Management", "items": "comma, separated"}],
+    "degrees": [{"degree": "Master of Science, Information Technology Management (MSIT)", "institution": "Atlantic International University, USA", "year": "2023"}],
+    "certifications": ["Certified Information Privacy Manager (CIPM) — International Association of Privacy Professionals (IAPP), 2025"],
+    "additional": ["..."]
   },
   "cover": {"greeting": "Dear Hiring Committee,", "paragraphs": ["p1","p2","p3","p4","p5"], "signoff": "Sincerely,", "recruiter_note": "optional"}
 }
