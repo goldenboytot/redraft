@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "check:docx": "node scripts/check-docx.mjs"
+    "check:docx": "node scripts/check-docx.mjs",
+    "check:storage": "node --test scripts/check-storage.test.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.131.0",

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 // The UI shell. All behaviour lives in lib/redraft/app.js, which wires itself to these ids once mounted.
-export default function RedraftApp() {
+export default function RedraftApp({ isAdmin = false }: { isAdmin?: boolean }) {
   useEffect(() => {
     let alive = true;
     import("@/lib/redraft/app.js").then(({ init }) => {
@@ -28,6 +28,10 @@ export default function RedraftApp() {
             <div className="bar-actions">
               <label className="toggle" title="Uses Claude Opus. Slower, better for first builds."><input type="checkbox" id="deep" /> Deep mode</label>
               <button className="btn" id="sessionsBtn" hidden>Sessions</button>
+              {isAdmin && <nav className="view-mode" aria-label="Account view">
+                <a className="btn" href="/" aria-current="page">User view</a>
+                <a className="btn" href="/admin">Admin view</a>
+              </nav>}
               <button className="btn" id="newBtn">New</button>
             </div>
           </div>

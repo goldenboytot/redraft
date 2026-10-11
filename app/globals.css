@@ -251,3 +251,26 @@ button { cursor: pointer; }
 .login-link { justify-self: center; padding: 2px 4px; font-size: 12.5px; color: var(--muted); text-decoration: underline; }
 .login-msg { font-size: 13.5px; }
 .login-msg.err { color: var(--bad); } .login-msg.ok { color: var(--ok); }
+
+/* Read-only administration */
+.view-mode { display: flex; gap: 6px; flex-wrap: wrap; }
+.view-mode .btn { text-decoration: none; }
+.view-mode [aria-current="page"] { background: var(--accent-soft); color: var(--ink); border-color: var(--accent); }
+.admin-page { max-width: 1200px; margin: 0 auto; padding: 28px 20px; display: grid; gap: 18px; }
+.admin-page h1, .admin-page h2, .admin-page p { margin: 0; }
+.admin-page a { color: var(--accent); overflow-wrap: anywhere; }
+.admin-page .btn { text-decoration: none; }
+.admin-filters { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; }
+.admin-filters label { display: grid; gap: 4px; flex: 1; min-width: 180px; }
+.admin-filters input, .admin-filters select { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 9px; width: 100%; }
+.admin-table-wrap { overflow-x: auto; }
+.admin-table { width: 100%; border-collapse: collapse; background: var(--surface); text-align: left; }
+.admin-table th, .admin-table td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.admin-table th { white-space: nowrap; }
+.admin-files { display: grid; gap: 14px; padding-left: 20px; }
+.admin-files li > span { display: block; }
+.admin-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+.admin-page dl { margin: 8px 0; }
+.admin-page dt { text-transform: capitalize; font-weight: 600; margin-top: 12px; }
+.admin-page dd { margin-left: 16px; }
+.admin-message { padding: 16px 0; border-top: 1px solid var(--line); }
